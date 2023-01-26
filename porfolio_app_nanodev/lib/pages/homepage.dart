@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:porfolio_app_nanodev/components/aboutme.dart';
+import 'package:porfolio_app_nanodev/utils/utils.dart';
+import 'package:porfolio_app_nanodev/components/natbar_action.dart';
+import 'package:porfolio_app_nanodev/utils/constants.dart';
+import 'package:porfolio_app_nanodev/models/project_model.dart';
+import 'package:porfolio_app_nanodev/components/my.drawer.dart';
+import 'package:porfolio_app_nanodev/components/social_icons_bar.dart';
+
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
+  final ScrollController myScrollController = ScrollController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: const Text(
+                  'Nano Code',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Color(0xff4756df),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.sunny),
+                  color: Color(0xff4756df),
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.white,
+        toolbarHeight: 66,
+        elevation: 2,
+        actions: [
+          Utils.isMobile(context)
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Color(0xFf4756DF),
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      _scaffoldKey.currentState!.openEndDrawer();
+                    },
+                  ),
+                )
+              : NatbarAction(
+                  sc: myScrollController,
+                ),
+        ],
+      ),
+      endDrawer: Utils.isMobile(context)
+          ? MyDrawer(
+              sc: myScrollController,
+            )
+          : null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Image.asset('assets/images/icons8-upward-arrow.gif'),
+      ),
+      body: SafeArea(
+          child: Stack(
+        children: [
+          SingleChildScrollView(
+            controller: myScrollController,
+            child: Column(children: const [
+              AboutMe(),
+            ]),
+          ),
+          const SocialIconsBar(),
+        ],
+      )),
+    );
+  }
+}
