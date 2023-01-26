@@ -17,9 +17,11 @@ class HomePage extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Container(
+          padding: const EdgeInsets.all(0.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              //  Padding(padding: const EdgeInsets.all(0.0)),
               Expanded(
                 child: const Text(
                   'Nano Code',
@@ -32,6 +34,7 @@ class HomePage extends StatelessWidget {
               ),
               Expanded(
                 child: IconButton(
+                  padding: const EdgeInsets.only(left: 100),
                   onPressed: () {},
                   icon: Icon(Icons.sunny),
                   color: Color(0xff4756df),
