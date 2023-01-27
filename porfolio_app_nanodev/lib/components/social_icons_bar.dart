@@ -15,10 +15,10 @@ class SocialIconsBar extends StatelessWidget {
         width: 35,
         child: Column(
           children: const [
-            SocialIcon(imgAss: 'assets/images/twitter-circ.gif'),
-            SocialIcon(imgAss: 'assets/images/instagram-icon.gif'),
-            SocialIcon(imgAss: 'assets/images/linkedin-circ.gif'),
-            SocialIcon(imgAss: 'assets/images/github-icon.gif'),
+            SocialIcon(imgAss: 'assets/images/twitter.png'),
+            SocialIcon(imgAss: 'assets/images/instagram.png'),
+            SocialIcon(imgAss: 'assets/images/linkedin.png'),
+            SocialIcon(imgAss: 'assets/images/github.png'),
           ],
         ),
       ),

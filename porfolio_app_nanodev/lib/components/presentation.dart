@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:porfolio_app_nanodev/utils/utils.dart';
 
-class AboutMe extends StatelessWidget {
-  const AboutMe({super.key});
+class Presentation extends StatelessWidget {
+  const Presentation({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:porfolio_app_nanodev/components/aboutme.dart';
+import 'package:porfolio_app_nanodev/components/presentation.dart';
 import 'package:porfolio_app_nanodev/utils/utils.dart';
 import 'package:porfolio_app_nanodev/components/natbar_action.dart';
 import 'package:porfolio_app_nanodev/utils/constants.dart';
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
           : null,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Image.asset('assets/images/icons8-upward-arrow.gif'),
+        child: Image.asset('assets/images/download.ico'),
       ),
       body: SafeArea(
           child: Stack(
@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
           SingleChildScrollView(
             controller: myScrollController,
             child: Column(children: const [
-              AboutMe(),
+              Presentation(),
             ]),
           ),
           const SocialIconsBar(),
