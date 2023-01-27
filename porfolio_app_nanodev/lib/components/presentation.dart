@@ -54,7 +54,7 @@ class Presentation extends StatelessWidget {
               padding: Utils.isMobile(context)
                   ? const EdgeInsets.all(2.0)
                   : const EdgeInsets.only(
-                      top: 50, bottom: 50, right: 10, left: 100),
+                      top: 200, bottom: 50, right: 250, left: 10),
               child: Image.asset(
                 'assets/images/nanopic.png',
                 alignment: Alignment.topRight,

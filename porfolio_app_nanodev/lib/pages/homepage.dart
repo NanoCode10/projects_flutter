@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:porfolio_app_nanodev/components/aboutme.dart';
 import 'package:porfolio_app_nanodev/components/presentation.dart';
 import 'package:porfolio_app_nanodev/utils/utils.dart';
 import 'package:porfolio_app_nanodev/components/natbar_action.dart';
@@ -21,10 +22,10 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              //  Padding(padding: const EdgeInsets.all(0.0)),
+              //Padding(padding: const EdgeInsets.all(0.0)),
               Expanded(
                 child: const Text(
-                  'Nano Code',
+                  '< Nano Code >',
                   style: TextStyle(
                     fontSize: 22,
                     color: Color(0xff4756df),
@@ -72,8 +73,15 @@ class HomePage extends StatelessWidget {
             )
           : null,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Image.asset('assets/images/download.ico'),
+        mini: Utils.isMobile(context) ? true : false,
+        onPressed: () {
+          myScrollController.animateTo(
+            10000,
+            duration: const Duration(milliseconds: 1600),
+            curve: Curves.easeIn,
+          );
+        },
+        child: Image.asset('assets/images/down-arrow.png'),
       ),
       body: SafeArea(
           child: Stack(
@@ -82,6 +90,8 @@ class HomePage extends StatelessWidget {
             controller: myScrollController,
             child: Column(children: const [
               Presentation(),
+              SizedBox(height: 50),
+              MoreAboutMe(),
             ]),
           ),
           const SocialIconsBar(),
