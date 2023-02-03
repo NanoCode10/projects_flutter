@@ -1,6 +1,8 @@
 import 'dart:math';
-
+import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
+import 'package:swipeable_button_view/swipeable_button_view.dart';
+import 'package:dicegame/dashborard.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isFinished = false;
   double translateX = 0.0;
   double translateY = 0.0;
   double myWidth = 0;
@@ -76,102 +79,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.refresh),
                 label: const Text('Roll'),
               ),*/
-              Expanded(
-                child: Row(
-                  children: [
-                    Padding(padding: EdgeInsets.all(5)),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.00),
-                          color: Colors.blue[50]),
-                      width: MediaQuery.of(context).size.width - 30,
-                      height: 100,
-                      child: GestureDetector(
-                        onHorizontalDragUpdate: (event) async {
-                          if (event.primaryDelta! > 10) {
-                            _incTansXVal();
-                          }
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            paymentSuccessful(),
-                            myWidth == 0.0
-                                ? Expanded(
-                                    child: Center(
-                                      child: Text(
-                                        "Swipe to Game!!!",
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontSize: 20.00),
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox(),
-                          ],
-                        ),
+
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 25),
+                child: SwipeableButtonView(
+                    buttonText: "SLIDE TO GAME !!!",
+                    buttonWidget: Container(
+                      child: Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: Colors.grey,
                       ),
                     ),
-                  ],
-                ),
-              )
+                    activeColor: Color(0xff3398F6),
+                    isFinished: isFinished,
+                    onWaitingProcess: () {
+                      Future.delayed(Duration(seconds: 2), () {
+                        setState(() {
+                          isFinished = true;
+                          _rolledDice();
+                        });
+                      });
+                    },
+                    onFinish: () async {
+                      /* await Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: const DashboardScreen()));
+
+                      setState(() {
+                        isFinished = false;
+                      });*/
+                      setState(() {
+                        _rolledDice();
+                        isFinished = false;
+                      });
+                    }),
+              ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  Widget paymentSuccessful() => Transform.translate(
-        offset: Offset(translateX, translateY),
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 200),
-          curve: Curves.linear,
-          width: 100 + myWidth,
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50.00),
-            color: Colors.blue,
-          ),
-          child: myWidth > 70.0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    Flexible(
-                      child: Text(
-                        " Game successful !!",
-                        style: TextStyle(color: Colors.white, fontSize: 20.00),
-                      ),
-                    ),
-                  ],
-                )
-              : Icon(
-                  Icons.navigate_next,
-                  color: Colors.white,
-                  size: 50.00,
-                ),
-        ),
-      );
-
-  _incTansXVal() async {
-    int canLoop = -1;
-    for (var i = 0; canLoop == -1; i++)
-      await Future.delayed(Duration(milliseconds: 1), () {
-        setState(() {
-          if (translateX + 1 <
-              MediaQuery.of(context).size.width - (200 + myWidth)) {
-            translateX += 1;
-            _rolledDice();
-            myWidth = MediaQuery.of(context).size.width - (135 + myWidth);
-          } else {
-            canLoop = 1;
-          }
-        });
-      });
   }
 }
