@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+import 'package:porfolio_nano_v3/posts/posts_1.dart';
+import 'package:porfolio_nano_v3/posts/posts_2.dart';
+import 'package:porfolio_nano_v3/posts/posts_3.dart';
+
+var defaultBackgroundColor = Colors.grey[300];
+var appBarColor = Color.fromARGB(255, 23, 81, 240);
+var myAppBar = AppBar(
+  backgroundColor: appBarColor,
+  title: Text('< Nano Code > '),
+  centerTitle: true,
+  actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sunny))],
+);
+
+var tilePadding = const EdgeInsets.only(left: 8.0, right: 8, top: 8);
+
+int selectedIndex = 1;
+
+int index = selectedIndex;
+
+void dispose(int selectedIndex) {
+  //setState(() {});
+  // selectedIndex = index;
+  pageView();
+  // controller.dispose();
+  print('disponse: $selectedIndex');
+}
+
+class pageView extends StatefulWidget {
+  // final Function disponse;
+
+  const pageView({super.key});
+
+  @override
+  State<pageView> createState() => pageViewState();
+}
+
+class pageViewState extends State<pageView> {
+  final controller = PageController(initialPage: selectedIndex);
+
+  @override
+  Widget build(BuildContext context) {
+    print('inicio: $selectedIndex');
+    return PageView(
+      scrollDirection: Axis.vertical,
+      controller: controller,
+      onPageChanged: (index) {
+        setState(() {
+          //dispose(selectedIndex);
+          print('Page: $index');
+        });
+      },
+      children: [
+        MyPost1(),
+        MyPost2(),
+        MyPost3(),
+      ],
+    );
+  }
+}
+
+class bottomNavigatorBar extends StatefulWidget {
+  final Function disponse;
+
+  const bottomNavigatorBar({
+    Key? key,
+    required this.disponse,
+  }) : super(key: key);
+
+
+  
+  @override
+  State<bottomNavigatorBar> createState() => _bottomNavigatorBarState();
+}
+
+class _bottomNavigatorBarState extends State<bottomNavigatorBar> {
+  
+  
+  
+  @override
+  Widget build(BuildContext context) {
+    print('selector de estado:  $selectedIndex');
+    return BottomNavigationBar(
+        currentIndex: selectedIndex,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.indigoAccent,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.feed), label: 'About Me'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.rocket_launch), label: 'Skills'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.phone_enabled), label: 'Contact')
+        ],
+        onTap: (int index) {
+          selectedIndex = index;
+
+          setState(() {
+            dispose(selectedIndex);
+            print('bar: $selectedIndex');
+          });
+        });
+  }
+}
+
+class navigationRail extends StatefulWidget {
+  const navigationRail({super.key});
+
+  @override
+  State<navigationRail> createState() => _navigationRailState();
+}
+
+class _navigationRailState extends State<navigationRail> {
+  @override
+  Widget build(BuildContext context) {
+    return NavigationRail(
+      onDestinationSelected: (int index) {
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      backgroundColor: Colors.grey,
+      //indicatorColor: Colors.indigoAccent,
+      elevation: 5,
+      //useIndicator: true,
+      selectedLabelTextStyle: const TextStyle(
+        color: Colors.indigo,
+      ),
+
+      selectedIndex: selectedIndex,
+      destinations: const [
+        NavigationRailDestination(icon: Icon(Icons.home), label: Text('Home')),
+        NavigationRailDestination(
+            icon: Icon(Icons.feed), label: Text('About Me')),
+        NavigationRailDestination(
+            icon: Icon(Icons.rocket_launch), label: Text('Skills')),
+        NavigationRailDestination(
+            icon: Icon(Icons.phone_enabled), label: Text('Contact')),
+      ],
+
+      labelType: NavigationRailLabelType.all,
+
+      unselectedLabelTextStyle: const TextStyle(),
+      // Called when one tab is selected
+      leading: Column(
+        children: const [
+          SizedBox(
+            height: 200,
+          ),
+        ],
+      ),
+    );
+  }
+}

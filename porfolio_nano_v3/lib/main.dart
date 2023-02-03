@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.indigo),
       home: ResponsiveLayout(
         mobileBody: const MobileScaffold(),
         tabletBody: const TabletScaffold(),
