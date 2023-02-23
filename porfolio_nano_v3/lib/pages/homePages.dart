@@ -5,8 +5,22 @@ class homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green[300],
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        SizedBox(
+          child: Container(
+            height: 100,
+            width: 200,
+            margin: EdgeInsets.only(bottom: 10),
+            color: Colors.deepOrange,
+          ),
+        ),
+      ],
     );
+
+    //return Container(
+    //  color: Color.fromARGB(255, 241, 236, 236),
+    //);
   }
 }

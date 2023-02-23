@@ -18,22 +18,8 @@ class _TabletScaffold extends State<TabletScaffold> {
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: myAppBar,
-      bottomNavigationBar: MyBottomNavigationBar(),
-      body: PageView(
-        controller: pageController,
-        scrollDirection: Axis.vertical,
-        onPageChanged: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        children: [
-          homepage(),
-          aboutme(),
-          skills(),
-          contact(),
-        ],
-      ),
+      body: PageViwCustom(),
+      bottomNavigationBar: MyCustomNavitacionBar(),
     );
   }
 }

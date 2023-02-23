@@ -13,29 +13,16 @@ class MobileScaffold extends StatefulWidget {
 }
 
 class _MobileScaffoldState extends State<MobileScaffold> {
+  // int selectedIndex = 0;
+  // final PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: myAppBar,
-      /*  body: PageView(
-        controller: pageController,
-        scrollDirection: Axis.vertical,
-        onPageChanged: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-          print(selectedIndex);
-        },
-        children: [
-          homepage(),
-          aboutme(),
-          skills(),
-          contact(),
-        ],
-        physics: NeverScrollableScrollPhysics(),
-      ),*/
-      bottomNavigationBar: MyBottomNavigationBar(),
+      body: PageViwCustom(),
+      bottomNavigationBar: MyCustomNavitacionBar(),
     );
   }
 }
