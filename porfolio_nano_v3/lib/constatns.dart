@@ -73,7 +73,7 @@ class _MyCustomNavigationRailState extends State<MyCustomNavigationRail> {
               });
             },
             children: [
-              homepage(),
+              homepage_dcktop(),
               aboutme(),
               skills(),
               contact(),
@@ -161,7 +161,7 @@ class _PageViwCustomState extends State<PageViwCustom> {
         });
       },
       children: [
-        homepage(),
+        homepage_mobile(),
         aboutme(),
         skills(),
         contact(),
