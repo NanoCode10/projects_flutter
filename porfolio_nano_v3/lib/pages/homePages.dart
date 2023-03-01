@@ -6,46 +6,51 @@ class homepage_dcktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        Container(
-          //  child: SizedBox(
-          child: Container(
-            height: MediaQuery.of(context).size.height / 10,
-            width: MediaQuery.of(context).size.width / 3,
-            margin: EdgeInsets.only(bottom: 50, left: 90, right: 50, top: 50),
-            color: Colors.deepOrange,
-          ),
-          // ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height / 10,
-          width: MediaQuery.of(context).size.width / 2.3,
-          margin: EdgeInsets.only(bottom: 50, left: 50, right: 50, top: 50),
-          color: Colors.green,
-        ),
-        //SizedBox(
-
-        SizedBox(
-          width: 500.0,
-          height: 500.0,
-          child: ListView(
-            scrollDirection: Axis.vertical,
+    return Container(
+      //color: Colors.blueAccent,
+      child: Column(
+        children: [
+          Row(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                margin:
-                    EdgeInsets.only(bottom: 50, left: 50, right: 50, top: 50),
-                color: Colors.deepPurpleAccent,
+              Padding(
+                padding: const EdgeInsets.only(left: 100.0),
+                child: Text(
+                  "Hi 👋, I am Mariano Developer!!",
+                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 150.0, top: 210.0),
+                child: Image(
+                  image: AssetImage('assets/images/nanopic.png'),
+                  width: 600,
+                ),
               ),
             ],
           ),
-        ),
-
-        //   )
-      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.link_sharp,
+                    size: 35,
+                  ),
+                  Icon(
+                    Icons.link_sharp,
+                    size: 35,
+                  ),
+                  Icon(
+                    Icons.link_sharp,
+                    size: 35,
+                  )
+                ],
+              )
+            ],
+          )
+        ],
+      ),
     );
 
     //return Container(
