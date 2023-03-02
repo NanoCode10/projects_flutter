@@ -34,7 +34,7 @@ class homepage_dcktop extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    Icons.link_sharp,
+                    Icons.face_sharp,
                     size: 35,
                   ),
                   Icon(
