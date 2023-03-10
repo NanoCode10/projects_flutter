@@ -136,7 +136,7 @@ class _MyCustomNavitacionBarState extends State<MyCustomNavitacionBar> {
         ),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: Colors.black,
       onTap: _onItemTapped,
     );
   }
