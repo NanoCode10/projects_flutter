@@ -1,4 +1,4 @@
-part of '/ui.theme/theme_app.dart';
+part of 'package:app_pruebas_uitheme/ui.theme/theme_app.dart';
 
 //Esquema de colores Light
 ColorScheme get _colorSchemaLight => ColorScheme.light(
