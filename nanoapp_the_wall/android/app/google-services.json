@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175477678089",
+    "project_id": "walltutorial-e9506",
+    "storage_bucket": "walltutorial-e9506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175477678089:android:ec9c5dbd088d9898b4d8d8",
+        "android_client_info": {
+          "package_name": "com.example.nanoapp_the_wall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175477678089-fa9u4f3t8g13qk8hce8s31ch8lu35hn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJnCSdvZl7oLq6Qku_ZKGFCfSAS8qJ9AU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175477678089-fa9u4f3t8g13qk8hce8s31ch8lu35hn0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
