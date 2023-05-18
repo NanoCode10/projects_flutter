@@ -17,8 +17,8 @@ class WallPost extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      margin: EdgeInsets.only(top: 25, left: 25, right: 25),
-      padding: EdgeInsets.all(25),
+      margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+      padding: const EdgeInsets.all(25),
       child: Row(
         children: [
           //profile pic
@@ -27,7 +27,7 @@ class WallPost extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey[400],
             ),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: const Icon(
               Icons.person,
               color: Colors.white,
