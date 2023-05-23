@@ -74,7 +74,7 @@ class _WallPostState extends State<WallPost> {
               //like count
               Text(
                 widget.likes.length.toString(),
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),

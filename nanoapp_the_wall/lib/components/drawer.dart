@@ -44,10 +44,13 @@ class MyDrawer extends StatelessWidget {
           ),
 
           //logout list tile
-          MyListTile(
-            icon: Icons.logout,
-            text: 'L O G O U T ',
-            onTap: onSignOut,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25.0),
+            child: MyListTile(
+              icon: Icons.logout,
+              text: 'L O G O U T ',
+              onTap: onSignOut,
+            ),
           ),
         ],
       ),
