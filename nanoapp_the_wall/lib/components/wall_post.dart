@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nanoapp_the_wall/components/comment_button.dart';
 import 'package:nanoapp_the_wall/components/like_button.dart';
 
 class WallPost extends StatefulWidget {
@@ -24,6 +25,10 @@ class _WallPostState extends State<WallPost> {
   //user
   final currentUser = FirebaseAuth.instance.currentUser!;
   bool isLiked = false;
+
+  //comment text controller
+  final _commentTextController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +58,48 @@ class _WallPostState extends State<WallPost> {
     }
   }
 
+  //
+  void addComennet(String commentText) {
+    //write the comment to firestore under the comments collection for this post
+    FirebaseFirestore.instance
+        .collection("User Posts")
+        .doc(widget.postId)
+        .collection("comments")
+        .add({
+      "CommentText": commentText,
+      "CommentedBy": currentUser.email,
+      "CommentTime": Timestamp.now() //remember to format this when displaying
+    });
+  }
+
+  //show a dialog box for adding comment
+  void showCommentDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Add Comment"),
+        content: TextField(
+          controller: _commentTextController,
+          decoration: InputDecoration(hintText: "Write a comment.."),
+        ),
+        actions: [
+          //post button
+          TextButton(
+            onPressed: () => addComennet(_commentTextController.text),
+            child: Text("Post"),
+          ),
+
+          //cancel button
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Cancel"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -61,23 +108,9 @@ class _WallPostState extends State<WallPost> {
       ),
       margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
       padding: const EdgeInsets.all(25),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              //like button
-              LikeButton(
-                isLiked: isLiked,
-                onTap: toggleLike,
-              ),
-              const SizedBox(height: 5),
-              //like count
-              Text(
-                widget.likes.length.toString(),
-                style: const TextStyle(color: Colors.grey),
-              ),
-            ],
-          ),
           const SizedBox(width: 20),
           //messsage and user email
           Column(
@@ -88,6 +121,45 @@ class _WallPostState extends State<WallPost> {
                 style: TextStyle(color: Colors.grey[500]),
               ),
               Text(widget.message),
+            ],
+          ),
+
+          const SizedBox(width: 20),
+
+          //buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //LIKE
+              Column(
+                children: [
+                  //like button
+                  LikeButton(
+                    isLiked: isLiked,
+                    onTap: toggleLike,
+                  ),
+                  const SizedBox(height: 5),
+                  //like count
+                  Text(
+                    widget.likes.length.toString(),
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+
+              //CoMMENT
+              Column(
+                children: [
+                  //comment button
+                  CommentButton(onTap: showCommentDialog),
+                  const SizedBox(height: 5),
+                  //like count
+                  Text(
+                    widget.likes.length.toString(),
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
             ],
           )
         ],
