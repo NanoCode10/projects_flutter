@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nanoapp_the_wall/components/drawer.dart';
 import 'package:nanoapp_the_wall/components/text_field.dart';
 import 'package:nanoapp_the_wall/components/wall_post.dart';
+import 'package:nanoapp_the_wall/helper/helper_methods.dart';
 
 import 'profile_page.dart';
 
@@ -95,6 +96,7 @@ class _HomePageState extends State<HomePage> {
                           user: post['UserEmail'],
                           postId: post.id,
                           likes: List<String>.from(post['Likes'] ?? []),
+                          time: formatDate(post['TimeStamp']),
                         );
                       },
                     );
