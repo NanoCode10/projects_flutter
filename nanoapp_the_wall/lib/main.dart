@@ -15,7 +15,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeChanger(ThemeData.dark())),
+        ChangeNotifierProvider(create: (_) => ThemeChanger(lightTheme)),
       ],
       child: const MyApp(),
     ),

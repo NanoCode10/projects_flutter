@@ -64,17 +64,17 @@ class _HomePageState extends State<HomePage> {
   }
 
 //toggle theme
-  bool _isdark = false;
+  bool isdark = false;
   void toggleTheme() {
     final theme = Provider.of<ThemeChanger>(context, listen: false);
 
     setState(() {
-      if (_isdark) {
+      if (isdark) {
         theme.setTheme(lightTheme);
-        _isdark = false;
+        isdark = false;
       } else {
         theme.setTheme(darkTheme);
-        _isdark = true;
+        isdark = true;
       }
     });
   }

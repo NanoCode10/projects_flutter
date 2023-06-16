@@ -44,8 +44,12 @@ class MyDrawer extends StatelessWidget {
               ),
               //profile list title
               MyListTile(
-                icon: Icons.brightness_3,
-                text: 'D A R K  /  L I G H T',
+                icon: Theme.of(context).brightness == Brightness.light
+                    ? Icons.sunny
+                    : Icons.brightness_3,
+                text: Theme.of(context).brightness == Brightness.light
+                    ? ' T H E M E   L I G T H '
+                    : 'T H E M E   D A R K ',
                 onTap: onThemeTap,
               ),
             ],
