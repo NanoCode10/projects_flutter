@@ -5,6 +5,10 @@ import 'package:nanoapp_the_wall/components/drawer.dart';
 import 'package:nanoapp_the_wall/components/text_field.dart';
 import 'package:nanoapp_the_wall/components/wall_post.dart';
 import 'package:nanoapp_the_wall/helper/helper_methods.dart';
+import 'package:nanoapp_the_wall/theme/dark_theme.dart';
+import 'package:nanoapp_the_wall/theme/light_theme.dart';
+import 'package:nanoapp_the_wall/theme/mytheme.dart';
+import 'package:provider/provider.dart';
 
 import 'profile_page.dart';
 
@@ -59,16 +63,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+//toggle theme
+  bool _isdark = false;
+  void toggleTheme() {
+    final theme = Provider.of<ThemeChanger>(context, listen: false);
+
+    setState(() {
+      if (_isdark) {
+        theme.setTheme(lightTheme);
+        _isdark = false;
+      } else {
+        theme.setTheme(darkTheme);
+        _isdark = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text("The Wall"),
-        backgroundColor: Colors.grey[900],
       ),
       drawer: MyDrawer(
         onProfileTap: goToProfilePage,
+        onThemeTap: toggleTheme,
         onSignOut: signOut,
       ),
       body: Center(

@@ -3,27 +3,29 @@ import 'package:nanoapp_the_wall/components/my_list_tile.dart';
 
 class MyDrawer extends StatelessWidget {
   final void Function()? onProfileTap;
+  final void Function()? onThemeTap;
   final void Function()? onSignOut;
   const MyDrawer({
     super.key,
     required this.onProfileTap,
+    required this.onThemeTap,
     required this.onSignOut,
   });
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
               //header
-              const DrawerHeader(
+              DrawerHeader(
                 child: Icon(
                   Icons.person,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   size: 64,
                 ),
               ),
@@ -39,6 +41,12 @@ class MyDrawer extends StatelessWidget {
                 icon: Icons.person,
                 text: 'P R O F I L E',
                 onTap: onProfileTap,
+              ),
+              //profile list title
+              MyListTile(
+                icon: Icons.brightness_3,
+                text: 'D A R K  /  L I G H T',
+                onTap: onThemeTap,
               ),
             ],
           ),
