@@ -81,10 +81,10 @@ class _WallPostState extends State<WallPost> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Add Comment"),
+        title: const Text("Add Comment"),
         content: TextField(
           controller: _commentTextController,
-          decoration: InputDecoration(hintText: "Write a comment.."),
+          decoration: const InputDecoration(hintText: "Write a comment.."),
         ),
         actions: [
           //cancel button
@@ -96,7 +96,7 @@ class _WallPostState extends State<WallPost> {
               //clear controller
               _commentTextController.clear();
             },
-            child: Text("Cancel"),
+            child: const Text("Cancel"),
           ),
           //post button
           TextButton(
@@ -110,7 +110,7 @@ class _WallPostState extends State<WallPost> {
               //clear controller
               _commentTextController.clear();
             },
-            child: Text("Post"),
+            child: const Text("Post"),
           ),
         ],
       ),
@@ -192,9 +192,9 @@ class _WallPostState extends State<WallPost> {
                   const SizedBox(height: 5),
 
                   //comment count
-                  Text(
+                  const Text(
                     '0',
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.grey),
                   ),
                 ],
               ),

@@ -23,21 +23,24 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey[900],
         title: Text(
-          "Edit " + field,
-          style: TextStyle(color: Colors.white),
+          "Edit $field",
+          style: const TextStyle(color: Colors.white),
         ),
         content: TextField(
           autofocus: true,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             hintText: "Enter new $field",
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: const TextStyle(color: Colors.grey),
           ),
+          onChanged: (value) {
+            newValue = value;
+          },
         ),
         actions: [
           //cancel button
           TextButton(
-            child: Text(
+            child: const Text(
               'cancel',
               style: TextStyle(color: Colors.white),
             ),
@@ -46,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           //save button
           TextButton(
-            child: Text(
+            child: const Text(
               'Save',
               style: TextStyle(color: Colors.white),
             ),
@@ -57,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
 
     //update in firestore
-    if (newValue.trim().length > 0) {
+    if (newValue.trim().isNotEmpty) {
       //only update if there is something in the textfield
       await usersColection.doc(currentUser.email).update({field: newValue});
     }
