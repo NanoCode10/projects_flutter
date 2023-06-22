@@ -255,8 +255,8 @@ class _WallPostState extends State<WallPost> {
                   const SizedBox(height: 5),
 
                   //comment count
-                  Text(
-                    _commentTextController.text.length.toString(),
+                  const Text(
+                    "0",
                     style: TextStyle(color: Colors.grey),
                   ),
                 ],
