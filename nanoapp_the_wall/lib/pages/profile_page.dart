@@ -15,13 +15,14 @@ class _ProfilePageState extends State<ProfilePage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   // all users
   final usersColection = FirebaseFirestore.instance.collection("Users");
+
   //edit field
   Future<void> editField(String field) async {
     String newValue = "";
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
           "Edit $field",
           style: const TextStyle(color: Colors.white),

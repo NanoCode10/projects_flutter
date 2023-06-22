@@ -22,10 +22,11 @@ class MyDrawer extends StatelessWidget {
           Column(
             children: [
               //header
+
               DrawerHeader(
                 child: Icon(
                   Icons.person,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.tertiary,
                   size: 64,
                 ),
               ),
