@@ -8,24 +8,22 @@ class homepage_dcktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.blueAccent,
-      // ignore: prefer_const_constructors
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 100.0, top: 200),
+                padding: const EdgeInsets.only(left: 100.0),
                 child: Text(
                   "Hi 👋, I am Mariano Developer!!",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 100.0, top: 150.0),
+                padding: const EdgeInsets.only(left: 150.0, top: 210.0),
                 child: Image(
                   image: AssetImage('assets/images/nanoAplaude.png'),
-                  width: 310,
+                  width: 600,
                 ),
               ),
             ],
@@ -33,7 +31,6 @@ class homepage_dcktop extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-<<<<<<< HEAD
               Row(
                 children: [
                   Icon(
@@ -49,26 +46,6 @@ class homepage_dcktop extends StatelessWidget {
                     size: 35,
                   )
                 ],
-=======
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: Row(
-                  children: [
-                    Image(
-                      image: AssetImage('assets/images/github.png'),
-                      width: 35,
-                    ),
-                    Image(
-                      image: AssetImage('assets/images/linkedin.png'),
-                      width: 35,
-                    ),
-                    Image(
-                      image: AssetImage('assets/images/twitter.png'),
-                      width: 35,
-                    ),
-                  ],
-                ),
->>>>>>> 60017983a5494ebe8f4064b6ad2636dfa6453d0f
               )
             ],
           )

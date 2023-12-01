@@ -1,5 +1,12 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nanocode_pokemon/controller/getDataController.dart';
+import 'package:nanocode_pokemon/pages/details_screen.dart';
+
+import 'package:dio/dio.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,62 +16,180 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final getDataController = Get.put(GetDataController());
+
+  @override
+  void initState() {
+    getDataController.geDataFromApi();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          _imagenFondo(),
-          _textoTitulo(),
-          Positioned(
-            top: 150,
-            bottom: 0,
-            width: width,
-            child: Column(
-              children: [
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 1.4),
-                    itemCount: 151,
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 5,
-                          horizontal: 5,
-                        ),
-                        child: InkWell(
-                          child: SafeArea(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25),
+    return Obx(
+      () => Scaffold(
+        backgroundColor: Colors.white,
+        body: !getDataController.isLoading.value
+            ? Stack(
+                children: [
+                  _imagenFondo(),
+                  _textoTitulo(),
+                  Positioned(
+                    top: 150,
+                    bottom: 0,
+                    width: width,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 1.4),
+                            itemCount: 151,
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 5,
                                 ),
-                                color: Colors.greenAccent,
-                              ),
-                              child: Stack(
-                                children: [
-                                  _PokeballInterno(),
-                                  _ImagenPokemon(),
-                                  _NombrePokemon(),
-                                  _TipoPokemon(),
-                                ],
-                              ),
-                            ),
+                                child: InkWell(
+                                  child: SafeArea(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(25),
+                                        ),
+                                        color: getDataController
+                                                    .getDataModel
+                                                    .value
+                                                    .results[index]
+                                                    .pokTipo ==
+                                                "Grass"
+                                            ? Colors.greenAccent
+                                            : getDataController
+                                                        .getDataModel
+                                                        .value
+                                                        .results[index]
+                                                        .pokTipo ==
+                                                    "Fire"
+                                                ? Colors.redAccent
+                                                : getDataController
+                                                            .getDataModel
+                                                            .value
+                                                            .results[index]
+                                                            .pokTipo ==
+                                                        "Water"
+                                                    ? Colors.blueAccent
+                                                    : getDataController
+                                                                .getDataModel
+                                                                .value
+                                                                .results[index]
+                                                                .pokTipo ==
+                                                            "Bug"
+                                                        ? Colors
+                                                            .lightGreenAccent
+                                                        : getDataController
+                                                                    .getDataModel
+                                                                    .value
+                                                                    .results[
+                                                                        index]
+                                                                    .pokTipo ==
+                                                                "Poison"
+                                                            ? Colors
+                                                                .purpleAccent
+                                                            : getDataController
+                                                                        .getDataModel
+                                                                        .value
+                                                                        .results[
+                                                                            index]
+                                                                        .pokTipo ==
+                                                                    "Electric"
+                                                                ? Colors.amber
+                                                                : getDataController
+                                                                            .getDataModel
+                                                                            .value
+                                                                            .results[index]
+                                                                            .pokTipo ==
+                                                                        "Groud"
+                                                                    ? Colors.brown
+                                                                    : getDataController.getDataModel.value.results[index].pokTipo == "Fighting"
+                                                                        ? Colors.orange
+                                                                        : getDataController.getDataModel.value.results[index].pokTipo == "Psychic"
+                                                                            ? Colors.pinkAccent
+                                                                            : getDataController.getDataModel.value.results[index].pokTipo == "Dragon"
+                                                                                ? Colors.blueGrey
+                                                                                : getDataController.getDataModel.value.results[index].pokTipo == "Rock"
+                                                                                    ? Colors.grey
+                                                                                    : getDataController.getDataModel.value.results[index].pokTipo == "Ice"
+                                                                                        ? Colors.lightBlue
+                                                                                        : Colors.black,
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          _PokeballInterno(),
+                                          _ImagenPokemon(index),
+                                          _NombrePokemon(index),
+                                          _TipoPokemon(index),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => DetailsScreen(
+                                          heroTag: index,
+                                          Wpoknom: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokNom,
+                                          WpokNum: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokNum,
+                                          WpokTipo: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokTipo,
+                                          WpokImg: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokImg,
+                                          WpokAltura: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokAltura,
+                                          WpokPeso: getDataController
+                                              .getDataModel
+                                              .value
+                                              .results[index]
+                                              .pokPeso,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+                      ],
+                    ),
+                  )
+                ],
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }
@@ -108,27 +233,30 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _ImagenPokemon() {
+  Widget _ImagenPokemon(index) {
     return Positioned(
       bottom: 5,
       right: 5,
-      child: CachedNetworkImage(
-        imageUrl: 'http://www.serebii.net/pokemongo/pokemon/094.png',
-        height: 80,
-        fit: BoxFit.fitHeight,
-        placeholder: ((context, url) => Center(
-              child: CircularProgressIndicator(),
-            )),
+      child: Hero(
+        tag: index,
+        child: CachedNetworkImage(
+          imageUrl: getDataController.getDataModel.value.results[index].pokImg,
+          height: 80,
+          fit: BoxFit.fitHeight,
+          placeholder: ((context, url) => Center(
+                child: CircularProgressIndicator(),
+              )),
+        ),
       ),
     );
   }
 
-  Widget _NombrePokemon() {
+  Widget _NombrePokemon(index) {
     return Positioned(
       top: 30,
       left: 15,
       child: Text(
-        'Gengar',
+        getDataController.getDataModel.value.results[index].pokNom,
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,
@@ -138,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _TipoPokemon() {
+  Widget _TipoPokemon(index) {
     return Positioned(
       top: 55,
       left: 15,
@@ -147,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
           child: Text(
-            'Ghost',
+            getDataController.getDataModel.value.results[index].pokTipo,
             style: TextStyle(
               color: Colors.white,
             ),

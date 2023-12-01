@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nanocode_pokemon/pages/details_screen.dart';
 import 'pages/homescreen.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DetailsScreen(),
+      home: HomeScreen(),
     );
   }
 }
